@@ -8,15 +8,19 @@ function whatTimeIsIt(props: IProps) {
   let hours = now.getHours()
   let minutes = now.getMinutes()
   let seconds = now.getSeconds()
+  let ampm
 
   if (props.format === 12) {
+    ampm = hours >= 12 ? 'pm' : 'am'
     hours = hours % 12 || 12
+    console.log(hours,hours >= 12)
   }
 
   let time: any = {
     hours: hours.toString().padStart(props.pad ? 2 : 1, '0'),
     minutes: minutes.toString().padStart(2, '0'),
     seconds: seconds.toString().padStart(2, '0'),
+    ampm: ampm,
   }
 
   return time
@@ -53,6 +57,7 @@ interface IState {
   seconds: string
   mouseInteraction: boolean
   lastTickHadColon: boolean
+  ampm: string
   clearMouseTimeout?: ReturnType<typeof setTimeout>
 }
 
@@ -123,6 +128,7 @@ export default class extends React.Component<IProps, IState> {
       hours: '',
       minutes: '',
       seconds: '',
+      ampm:'',
       mouseInteraction:
         this.props.showLink == null ? false : this.props.showLink,
       lastTickHadColon: false,
@@ -181,7 +187,7 @@ export default class extends React.Component<IProps, IState> {
 
     const newClearMouseTimeout = setTimeout(
       () => this.setState({ mouseInteraction: false }),
-      2000
+      2000,
     )
 
     this.setState({
@@ -221,6 +227,9 @@ export default class extends React.Component<IProps, IState> {
                 <span id="seconds">{this.state.seconds}</span>
               </>
             )}
+            {this.state.ampm && (
+                <span id="ampm"> {this.state.ampm}</span>
+            )}
           </div>
           <style global jsx>{`
             body,
@@ -252,8 +261,15 @@ export default class extends React.Component<IProps, IState> {
               top: 20px;
               left: 20px;
               font-size: 1.2rem;
-              font-family: system-ui, -apple-system, 'Segoe UI', Roboto,
-                Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+              font-family:
+                system-ui,
+                -apple-system,
+                'Segoe UI',
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif,
+                'Apple Color Emoji',
                 'Segoe UI Emoji';
               color: ${this.props.fg};
               opacity: 0.7;
