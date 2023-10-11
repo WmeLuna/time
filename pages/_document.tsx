@@ -5,7 +5,6 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <script data-goatcounter="/goat" async src="/count.js"></script>
           <link
             rel="apple-touch-icon"
             sizes="180x180"

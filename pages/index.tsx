@@ -209,9 +209,6 @@ export default class extends React.Component<IProps, IState> {
 
     return (
       <>
-        {mouseInteraction && (
-          <a href="https://github.com/pablopunk/time">Code available here</a>
-        )}
         <main onMouseMove={() => this.mouseInteracting()}>
           <div id="time">
             <span id="hours">{this.state.hours}</span>
@@ -246,7 +243,8 @@ export default class extends React.Component<IProps, IState> {
               display: flex;
               align-items: ${flexPositions.alignItems};
               justify-content: ${flexPositions.justifyContent};
-              font-weight: bold;
+              font-weight: normal;
+              user-select:none;
               color: ${this.props.fg};
               background-color: ${this.props.bg};
               font-family: ${this.props.font};
@@ -255,24 +253,6 @@ export default class extends React.Component<IProps, IState> {
             }
             #time {
               margin: 1rem;
-            }
-            a {
-              position: absolute;
-              top: 20px;
-              left: 20px;
-              font-size: 1.2rem;
-              font-family:
-                system-ui,
-                -apple-system,
-                'Segoe UI',
-                Roboto,
-                Helvetica,
-                Arial,
-                sans-serif,
-                'Apple Color Emoji',
-                'Segoe UI Emoji';
-              color: ${this.props.fg};
-              opacity: 0.7;
             }
           `}</style>
         </main>
