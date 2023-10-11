@@ -13,7 +13,6 @@ function whatTimeIsIt(props: IProps) {
   if (props.format === 12) {
     ampm = hours >= 12 ? 'pm' : 'am'
     hours = hours % 12 || 12
-    console.log(hours,hours >= 12)
   }
 
   let time: any = {
